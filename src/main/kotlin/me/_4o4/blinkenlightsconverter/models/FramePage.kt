@@ -5,6 +5,9 @@ class FramePage{
     fun addRow(row: String){
         rows.add(row)
     }
+    fun getRows(): List<String>{
+        return rows.toList()
+    }
     override fun toString(): String {
         val builder = StringBuilder()
         rows.forEach {

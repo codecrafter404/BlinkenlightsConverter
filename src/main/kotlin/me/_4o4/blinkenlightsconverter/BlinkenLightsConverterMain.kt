@@ -92,6 +92,8 @@ class BlinkenLightsConverterMain : CliktCommand() {
         Logger.info("Writing output to ${output.absolutePath}")
 
         output.writeText(writer.toString())
+
+        Logger.info("Theoretical animation size: ${width.toDouble() * height.toDouble() * converted.size.toDouble() * depth.toDouble() / 8.0 / 1024.0} Kb")
     }
 }
 fun main(args: Array<String>) = BlinkenLightsConverterMain().main(args)
