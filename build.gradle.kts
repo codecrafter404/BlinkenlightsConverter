@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.6.10"
-    application
+    id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
 group = "me._4o4"
@@ -12,6 +12,17 @@ repositories {
     mavenCentral()
 }
 
+tasks {
+    named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar"){
+        archiveBaseName.set("BlinkenLightsConverter-shadowed")
+        manifest {
+            attributes(mapOf("Main-Class" to "me._4o4.blinkenlightsconverter.MainKt"))
+        }
+    }
+    build {
+        dependsOn(shadowJar)
+    }
+}
 
 dependencies {
     testImplementation(kotlin("test"))
@@ -34,8 +45,4 @@ tasks.test {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
-}
-
-application {
-    mainClass.set("MainKt")
 }

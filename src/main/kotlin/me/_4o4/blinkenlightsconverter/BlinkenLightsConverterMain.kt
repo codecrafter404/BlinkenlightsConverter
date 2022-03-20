@@ -72,6 +72,7 @@ class BlinkenLightsConverterMain : CliktCommand() {
         Logger.info("Converted ${converted.size}/${frames.size} frames")
 
         Logger.info("Generating xml...")
+
         // template
         val templateMap = mutableMapOf<String, Any>()
         templateMap["width"] = width
@@ -84,7 +85,7 @@ class BlinkenLightsConverterMain : CliktCommand() {
         conf.defaultEncoding = "UTF-8"
         conf.locale = Locale.GERMAN
         conf.templateExceptionHandler = TemplateExceptionHandler.RETHROW_HANDLER
-        conf.setClassForTemplateLoading(BlinkenLightsConverterMain::class.java, "../../../")
+        conf.setClassForTemplateLoading(BlinkenLightsConverterMain::class.java, "/")
 
         val template = conf.getTemplate("template.ftl")
         val writer = StringWriter()
@@ -96,4 +97,3 @@ class BlinkenLightsConverterMain : CliktCommand() {
         Logger.info("Theoretical animation size: ${width.toDouble() * height.toDouble() * converted.size.toDouble() * depth.toDouble() / 8.0 / 1024.0} Kb")
     }
 }
-fun main(args: Array<String>) = BlinkenLightsConverterMain().main(args)
